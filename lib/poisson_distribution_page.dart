@@ -84,7 +84,7 @@ class _PoissonDistributionPageState extends State<PoissonDistributionPage> {
     expectation = lambda;
 
     if (_selectedCondition == 'Mayor o igual a') {
-      probability = calculateProbabilityGreaterThanOrEqual(lambda, x);
+      probability = calculateProbabilityXGreaterThanOrEqual(lambda, x);
     } else if (_selectedCondition == 'Menor o igual a') {
       probability = calculateProbabilityLessThanOrEqual(lambda, x);
     } else {
@@ -99,13 +99,14 @@ class _PoissonDistributionPageState extends State<PoissonDistributionPage> {
     return probability;
   }
 
-  double calculateProbabilityGreaterThanOrEqual(double lambda, int x) {
-    double probability = 0;
-    for (int i = x; i >= 0; i--) {
-      probability += _calculateProbability(lambda, i);
-    }
-    return probability;
+  double calculateProbabilityXGreaterThanOrEqual(double lambda, int k) {
+  double sum = 0;
+  for (int i = k; i >= 0; i--) {
+    sum += _calculateProbability(lambda, i);
   }
+  return sum;
+}
+
 
   double calculateProbabilityLessThanOrEqual(double lambda, int x) {
     double probability = 0;

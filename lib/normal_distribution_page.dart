@@ -49,7 +49,7 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
                   _selectedCondition = value;
                 });
               },
-              items: <String>['Mayor o igual a', 'Menor o igual a', 'Igual a'].map((String value) {
+              items: <String>['P(X>x)', 'P(X<x)'].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -90,35 +90,41 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
     variance = stdDev * stdDev;
     expectation = mean;
 
-    if (_selectedCondition == 'Mayor o igual a') {
-      probability = calculateProbabilityGreaterThanOrEqual(mean, stdDev, x);
-    } else if (_selectedCondition == 'Menor o igual a') {
-      probability = calculateProbabilityLessThanOrEqual(mean, stdDev, x);
-    } else {
-      probability = _calculateProbability(mean, stdDev, x);
+    if (_selectedCondition == 'P(X>x)') {
+      probability = calculateProbabilityXGreaterThan(mean, stdDev, x);
+    } else if (_selectedCondition == 'P(X<x)') {
+      probability = calculateProbabilityXLessThan(mean, stdDev, x);
     }
 
     setState(() {});
   }
 
-  double _calculateProbability(double mean, double stdDev, double x) {
-    double expTerm = exp(-((x - mean) * (x - mean)) / (2 * stdDev * stdDev));
-    double probability = (1 / (stdDev * sqrt(2 * pi))) * expTerm;
+  double calculateProbabilityXGreaterThan(double mean, double stdDev, double x) {
+    double z = (x - mean) / stdDev;
+    double probability = 0.5 * (1 - erf(z / sqrt(2)));
     return probability;
   }
 
-  double calculateProbabilityGreaterThanOrEqual(double mean, double stdDev, double x) {
-    // No hay una forma simple de calcular "mayor o igual a" para la distribución normal,
-    // puedes implementar métodos más avanzados como la función de distribución acumulativa (CDF) y luego calcular la probabilidad complementaria.
-    // Por simplicidad, puedes dejar este método vacío o mostrar un mensaje indicando que no se admite esta operación.
-    return 0;
+  double calculateProbabilityXLessThan(double mean, double stdDev, double x) {
+    double z = (x - mean) / stdDev;
+    double probability = 0.5 * (1 + erf(z / sqrt(2)));
+    return probability;
   }
 
-  double calculateProbabilityLessThanOrEqual(double mean, double stdDev, double x) {
-    // No hay una forma simple de calcular "menor o igual a" para la distribución normal,
-    // puedes implementar métodos más avanzados como la función de distribución acumulativa (CDF).
-    // Por simplicidad, puedes dejar este método vacío o mostrar un mensaje indicando que no se admite esta operación.
-    return 0;
+  double erf(double z) {
+    double t = 1.0 / (1.0 + 0.5 * z.abs());
+    double ans = 1 - t * exp(-z * z - 1.26551223 +
+        t * (1.00002368 +
+            t * (0.37409196 +
+                t * (0.09678418 +
+                    t * (-0.18628806 +
+                        t * (0.27886807 +
+                            t * (-1.13520398 +
+                                t * (1.48851587 +
+                                    t * (-0.82215223 +
+                                        t * (0.17087277))))))))));
+    return z >= 0 ? ans : -ans;
   }
 }
+
 
