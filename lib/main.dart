@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:probability_distribution_2/binomial_distribution_page.dart';
+import 'package:probability_distribution_2/chisquare_distribution.dart';
+import 'package:probability_distribution_2/exponential_distribution.dart';
 import 'package:probability_distribution_2/poisson_distribution_page.dart';
 import 'package:probability_distribution_2/normal_distribution_page.dart';
+import 'package:probability_distribution_2/tstudent_distribution.dart';
 
 void main() {
   runApp(DistributionApp());
@@ -21,6 +24,9 @@ class DistributionApp extends StatelessWidget {
         '/binomial': (context) => BinomialDistributionPage(),
         '/poisson': (context) => PoissonDistributionPage(),
         '/normal': (context) => NormalDistributionPage(),
+        '/exponential': (context) => ExponentialDistributionPage(),
+        '/chisquare': (context) => ChiSquareDistributionPage(),
+        '/tstudent': (context) => StudentTDistributionPage()
       },
     );
   }
@@ -55,6 +61,24 @@ class DistributionSelectionPage extends StatelessWidget {
               },
               child: Text('Distribución Normal'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/exponential');
+              },
+              child: Text('Distribución Exponencial'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/chisquare');
+              },
+              child: Text('Distribución Chi Cuadrada'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/tstudent');
+              },
+              child: Text('Distribución T-Student'),
+            )
           ],
         ),
       ),
