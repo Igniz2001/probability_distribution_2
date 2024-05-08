@@ -37,7 +37,7 @@ class DistributionSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seleccionar Distribución'),
+        title: const Text('Seleccionar Distribución'),
       ),
       body: Center(
         child: Column(
@@ -47,19 +47,19 @@ class DistributionSelectionPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/binomial');
               },
-              child: Text('Distribución Binomial'),
+              child: const Text('Distribución Binomial'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/poisson');
               },
-              child: Text('Distribución de Poisson'),
+              child: const Text('Distribución de Poisson'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/normal');
               },
-              child: Text('Distribución Normal'),
+              child: const Text('Distribución Normal'),
             ),
             ElevatedButton(
               onPressed: () {
