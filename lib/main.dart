@@ -4,7 +4,6 @@ import 'package:probability_distribution_2/chisquare_distribution.dart';
 import 'package:probability_distribution_2/exponential_distribution.dart';
 import 'package:probability_distribution_2/poisson_distribution_page.dart';
 import 'package:probability_distribution_2/normal_distribution_page.dart';
-import 'package:probability_distribution_2/tstudent_distribution.dart';
 
 void main() {
   runApp(DistributionApp());
@@ -25,8 +24,7 @@ class DistributionApp extends StatelessWidget {
         '/poisson': (context) => PoissonDistributionPage(),
         '/normal': (context) => NormalDistributionPage(),
         '/exponential': (context) => ExponentialDistributionPage(),
-        '/chisquare': (context) => ChiSquareDistributionPage(),
-        '/tstudent': (context) => StudentTDistributionPage()
+        '/chisquare': (context) => ChiSquareDistributionPage()
       },
     );
   }
