@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=C:\flutterclass\flutter"
-export "FLUTTER_APPLICATION_PATH=C:\Users\Usuario\Desktop\Universidad\Semestre 7\ESTADISTICA PARA INGENIERIA\Proyecto de Aula\probability_distribution_2"
+export "FLUTTER_ROOT=C:\Users\Usuario\Downloads\flutter_windows_3.16.9-stable\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Users\Usuario\Documents\GitHub\probability_distribution_2"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_TARGET=lib\main.dart"
 export "FLUTTER_BUILD_DIR=build"
