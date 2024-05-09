@@ -34,7 +34,8 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
             TextFormField(
               controller: stdDevController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(labelText: 'Valor de Desviación Estándar'),
+              decoration:
+                  InputDecoration(labelText: 'Valor de Desviación Estándar'),
             ),
             TextFormField(
               controller: xController,
@@ -44,7 +45,8 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
             DropdownButton<String>(
               hint: Text('Seleccione la condición'),
               value: _selectedCondition,
-              onChanged: (String? value) { // Cambiado a tipo nullable
+              onChanged: (String? value) {
+                // Cambiado a tipo nullable
                 setState(() {
                   _selectedCondition = value;
                 });
@@ -71,7 +73,8 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
             Text('Fórmulas:'),
             Text('Varianza = Desviación Estándar ^ 2'),
             Text('Esperanza = Media'),
-            Text('Probabilidad = (1 / (Desviación Estándar * sqrt(2 * pi))) * e^(-(x - Media)^2 / (2 * Desviación Estándar ^ 2))'),
+            Text(
+                'Probabilidad = (1 / (Desviación Estándar * sqrt(2 * pi))) * e^(-(x - Media)^2 / (2 * Desviación Estándar ^ 2))'),
           ],
         ),
       ),
@@ -79,9 +82,12 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
   }
 
   void calculateResults() {
-    double mean = double.tryParse(meanController.text) ?? 0.0; // Proporciona valor predeterminado si la conversión falla
-    double stdDev = double.tryParse(stdDevController.text) ?? 0.0; // Proporciona valor predeterminado si la conversión falla
-    double x = double.tryParse(xController.text) ?? 0.0; // Proporciona valor predeterminado si la conversión falla
+    double mean = double.tryParse(meanController.text) ??
+        0.0; // Proporciona valor predeterminado si la conversión falla
+    double stdDev = double.tryParse(stdDevController.text) ??
+        0.0; // Proporciona valor predeterminado si la conversión falla
+    double x = double.tryParse(xController.text) ??
+        0.0; // Proporciona valor predeterminado si la conversión falla
     if (stdDev <= 0) {
       // Manejar caso de valores no válidos
       return;
@@ -99,7 +105,8 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
     setState(() {});
   }
 
-  double calculateProbabilityXGreaterThan(double mean, double stdDev, double x) {
+  double calculateProbabilityXGreaterThan(
+      double mean, double stdDev, double x) {
     double z = (x - mean) / stdDev;
     double probability = 0.5 * (1 - erf(z / sqrt(2)));
     return probability;
@@ -113,18 +120,27 @@ class _NormalDistributionPageState extends State<NormalDistributionPage> {
 
   double erf(double z) {
     double t = 1.0 / (1.0 + 0.5 * z.abs());
-    double ans = 1 - t * exp(-z * z - 1.26551223 +
-        t * (1.00002368 +
-            t * (0.37409196 +
-                t * (0.09678418 +
-                    t * (-0.18628806 +
-                        t * (0.27886807 +
-                            t * (-1.13520398 +
-                                t * (1.48851587 +
-                                    t * (-0.82215223 +
-                                        t * (0.17087277))))))))));
+    double ans = 1 -
+        t *
+            exp(-z * z -
+                1.26551223 +
+                t *
+                    (1.00002368 +
+                        t *
+                            (0.37409196 +
+                                t *
+                                    (0.09678418 +
+                                        t *
+                                            (-0.18628806 +
+                                                t *
+                                                    (0.27886807 +
+                                                        t *
+                                                            (-1.13520398 +
+                                                                t *
+                                                                    (1.48851587 +
+                                                                        t *
+                                                                            (-0.82215223 +
+                                                                                t * (0.17087277))))))))));
     return z >= 0 ? ans : -ans;
   }
 }
-
-
