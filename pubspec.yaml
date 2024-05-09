@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   dart_numerics: 0.0.6
+  flutter_charts: ^0.5.2
 
 dev_dependencies:
   flutter_test:
